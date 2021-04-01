@@ -1,0 +1,8 @@
+.customgridwrap{display:flex;flex-wrap: wrap;align-items: stretch;}
+.customgridwrap p{flex-grow: 1;margin:0;background-color: #f1f1f1;display:block;width:15px;padding:0;border: 0.5px solid #ccc;height: 15px;}
+.profile-data{display:none;}
+.customgridwrap p.taken{background-color: red;}
+.darood{font-size: 22px;direction:rtl;text-align:justify;}
+.myloader{margin: 0px auto;border: 5px solid #f3f3f3;border-radius: 50%;border-top: 5px solid #3498db;width: 60px;height: 60px;-webkit-animation: spin 0.5s linear infinite;animation: spin 0.5s linear infinite;}
+@-webkit-keyframes spin {0% { -webkit-transform: rotate(0deg); }100% { -webkit-transform: rotate(360deg); }}
+@keyframes spin {0% { transform: rotate(0deg); }100% { transform: rotate(360deg); }}

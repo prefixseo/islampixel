@@ -1,0 +1,220 @@
+
+.ipx-hero{
+	justify-content: center;
+    height: 100vh;
+	justify-content: center;
+	display: flex;
+    background-repeat: no-repeat,no-repeat;
+    align-items: start;
+    background-position: center 26%,center;
+    background-size: 65%, cover;
+}
+.ipx-hero-child{
+    width: min(100%,1280px);
+	min-height: 200px;
+	background: white;
+    border-radius: 10px;
+	position: absolute;
+	bottom: -35%;
+	z-index: 9;
+    margin: 0px auto;
+	padding: 2rem 3rem;
+	display: flex;
+    box-shadow: 0 5px 20px #ccc;
+	justify-content: space-around;
+	column-gap: 1rem;
+}
+.darood-text{
+    margin-top: 120px;
+}
+.ipx-hero-child > div {
+    width: calc(100%/4);
+}
+.ipx-hero-child-first-child{
+    padding: 15px 30px;
+}
+.ipx-light-text{color: #ABABAB;font-size: 25px;margin-bottom: 10px;}
+.ipx-first-child-heading{
+    color: #030303;
+    font-size: 42px;
+    margin-bottom: 50px;
+    line-height: 40px;
+    font-weight: 500;
+}
+button.ipx-btn{ 
+    cursor: pointer;
+    display: block; min-width: 80px;margin: 0 auto;
+    background: linear-gradient( to right,#8DD9C0,#19A2A5 );
+    padding: 20px 10px;
+    font-size: 20px;
+    border: 0px;
+    border-radius: 40px;
+    color: white;
+ }
+button.ipx-btn:hover{background: linear-gradient( to left,#8DD9C0,#19A2A5 ); }
+.ipx-country-card{
+    box-shadow: 0 0 10px #ccc;
+    border-radius: 10px;
+}
+.ipx-country-card img{
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.ipx-card-description{
+    padding: 2rem;
+}
+.ipx-card-flag-name{
+    color: #5D7F8B;
+    font-size: 28px;
+}
+.ipx-card-count{
+    color: #BFBFBF;
+    font-size: 18px;
+    margin-top: 10px;
+}
+.btn-block{display: block;width: 100%;}
+.ipx-pixels-section{ width: min(90%,1180px); margin:0 auto; margin-top: 200px;margin-bottom: 50px;}
+.ipx-pixel-container{
+    border: 1px dotted #acacac;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+.ipx-pixel-container p {
+    flex-grow: 1;
+    margin: 0;
+    background-color: #f1f1f1;
+    display: block;
+    width: 15px;
+    padding: 0;
+    border: 0.5px solid #ccc;
+    height: 15px;
+}
+
+/* The Modal (background) */
+#ipx-profile-modal {
+  display: none;/*  Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Sit on top */
+  padding-top: 50px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+#ipx-profile-modal .ipx-modal-content {
+    margin: auto;
+    position: relative;
+    width: min(80%,620px);
+    background: white;
+    color: white;
+}
+.ipx-modal-header{
+    background: linear-gradient( to bottom,#8DD9C0,#19A2A5 );
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+.ipx-modal-header > div {
+    text-align: center;
+    margin: 10px 0;
+}
+.ipx-profile-img {
+    border-radius: 50%;
+    margin: 0 auto;
+    width: 120px;
+    height: 120px;
+    background-position: center !important;
+    background-size: cover !important;
+}
+
+.ipx-social-login-area{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.ipx-social-login-area button{
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    border: 0;
+    border-radius: 30px;
+    text-align: center;
+    margin: 10px 0;
+    outline: 0;
+    cursor: pointer;
+}
+.ipx-login-facebook{
+    background: linear-gradient(to left,#216ED9,#355BA6);
+}
+.ipx-login-google{
+    background: linear-gradient(to left,#d92121,#a63535);
+}
+
+.ipx-login-facebook:hover{
+    background: linear-gradient(to right,#216ED9,#355BA6);
+}
+.ipx-login-google:hover{
+    background: linear-gradient(to right,#d92121,#a63535);
+}
+/* The Close Button */
+#ipx-profile-modal .close {
+    color: white;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 28px;
+    line-height: 15px;
+    font-weight: bold;
+}
+
+#ipx-profile-modal .close:hover,
+#ipx-profile-modal .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 767px){
+    img.darood-text {
+        width: 100%;
+        padding: 10px;
+    }
+    .ipx-hero {
+        height: auto;
+        background-size: 90%, 240%;
+        background-position: center 7%,center 0%;
+    }
+    .ipx-hero-child {
+        padding: 2rem;
+        flex-direction: column;
+        position: relative;
+        top: 15px;
+        margin-top: 50vh;
+    }
+    .ipx-hero-child > div {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    button.ipx-btn.btn-block {
+        padding: 10px;
+        min-width: 100px;
+        display: unset;
+        width: unset;
+    }
+    h1.ipx-first-child-heading {
+        margin-bottom: 20px;
+    }
+    .ipx-pixels-section {
+        margin-top: 70px;
+    }
+}
