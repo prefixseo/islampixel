@@ -1,44 +1,4 @@
-<style>
-    footer{
-        width:100%;
-        height: auto;
-        background: url('{{ asset('images/footer.png') }}');
-        background-position: center;
-        padding: 30px;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-    .ipx-footer-widgets-wrapper{
-        padding: 20px;
-        display: flex;
-        justify-content: space-between;
-    }
-    .ipx-footer-widget{color: white;}
-    .ipx-footer-nav{display:flex;justify-content: space-between;}
-    .ipx-footer-nav > a { text-decoration: none;color: #9BC3C6;padding: 5px 10px; margin: 0 10px; }
-    
-    
-    @media screen and (max-width: 767px){
-        .ipx-footer-widgets-wrapper {
-            flex-direction: column;
-        }
-        .ipx-footer-widget {
-            text-align: center;
-            margin-bottom: 17px;
-        }
-        .ipx-footer-nav {
-            justify-content: center;
-        }
-        .ipx-social-nav {
-            display: flex;
-            justify-content: center;
-        }
-        .ipx-social-nav >a{
-            padding: 0px 10px; margin: 5px 10px;
-        }
-    }
-</style>
-<footer>
+<footer style="background: url('{{ asset('images/footer.png') }}');">
     <div class="ipx-footer-content">
         <div class="ipx-footer-widgets-wrapper">
             <div class="ipx-footer-widget">

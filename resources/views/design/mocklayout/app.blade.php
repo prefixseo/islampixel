@@ -11,6 +11,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <style>*{box-sizing: border-box;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}#app,body,*{ margin: 0;padding: 0; }</style>
     <!-- Styles -->
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @yield('styles')
     <link href="{{ asset('pixelFlag/flags.css') }}" rel="stylesheet">
 

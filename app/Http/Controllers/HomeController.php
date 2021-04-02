@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\pixelbox;
 use App\Models\User;
 use Session;
+use Illuminate\Support\Facades\DB;
 
 
 class HomeController extends Controller
@@ -94,6 +95,13 @@ class HomeController extends Controller
     public function newHome(){
         $pixels = pixelbox::select('boxid','country_id')->get()->toArray();
 
+
+        // SELECT country_id,userid FROM pixelboxes WHERE
+        // `created_at` > DATE_SUB(NOW(), INTERVAL 1 WEEK)
+        // ORDER BY `country_id` DESC limit 3
+
+        $popular = DB::select('select `country_id`, count(*) as cnt from pixelboxes group by `country_id` order by cnt desc limit 3');
+
         $boxIDs = array();
         $country_ids = array();
 
@@ -103,7 +111,7 @@ class HomeController extends Controller
                 array_push($country_ids, trim($v['country_id']));
             }
         }
-        return view('design.index', compact('boxIDs','country_ids'));
+        return view('design.index', compact('boxIDs','country_ids','popular'));
     }
 
     // -- Save box id as session and redirect for login

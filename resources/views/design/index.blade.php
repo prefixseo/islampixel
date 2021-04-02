@@ -14,29 +14,29 @@
             <div class="ipx-hero-child-first-child">
                 <p class="ipx-light-text">Top Three</p>
                 <h1 class="ipx-first-child-heading">Reader Country</h1>
-                <button class="ipx-btn btn-block">
+                <!-- <button class="ipx-btn btn-block">
                     See All
-                </button>
+                </button> -->
             </div>
             <div class="ipx-country-card">
-                <img src="{{ asset('images/demo.jpg') }}" alt="">
+                <img src="//www.countryflags.io/<?=isset($popular[0]->country_id) ? $popular[0]->country_id : 'PK'?>/flat/64.png" alt="">
                 <div class="ipx-card-description">
-                    <p class="ipx-card-flag-name">Pakistan</p>
-                    <p class="ipx-card-count">Records: 120</p>
+                    <p class="ipx-card-flag-name"><?=isset($popular[0]->country_id) ? $popular[0]->country_id : 'PK'?></p>
+                    <p class="ipx-card-count">Reader(s): <?=isset($popular[0]->cnt) ? $popular[0]->cnt : '---'?></p>
                 </div>
             </div>
             <div class="ipx-country-card">
-                <img src="{{ asset('images/demo.jpg') }}" alt="">
+                <img src="//www.countryflags.io/<?=isset($popular[1]->country_id) ? $popular[1]->country_id : 'PK'?>/flat/64.png" alt="">
                 <div class="ipx-card-description">
-                    <p class="ipx-card-flag-name">Pakistan</p>
-                    <p class="ipx-card-count">Records: 120</p>
+                    <p class="ipx-card-flag-name"><?=isset($popular[1]->country_id) ? $popular[1]->country_id : 'PK'?></p>
+                    <p class="ipx-card-count">Reader(s): <?=isset($popular[1]->cnt) ? $popular[1]->cnt : '---'?></p>
                 </div>
             </div>
             <div class="ipx-country-card">
-                <img src="{{ asset('images/demo.jpg') }}" alt="">
+                <img src="//www.countryflags.io/<?=isset($popular[2]->country_id) ? $popular[2]->country_id : 'PK'?>/flat/64.png" alt="">
                 <div class="ipx-card-description">
-                    <p class="ipx-card-flag-name">Pakistan</p>
-                    <p class="ipx-card-count">Records: 120</p>
+                    <p class="ipx-card-flag-name"><?=isset($popular[2]->country_id) ? $popular[2]->country_id : 'PK'?></p>
+                    <p class="ipx-card-count">Reader(s): <?=isset($popular[2]->cnt) ? $popular[2]->cnt : '---'?></p>
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@
 @section('content')
 <section>
     <div class="ipx-content-area">
-        <img src="{{ asset('images/shajra-sharif.png') }}" ondragstart="return false;" oncontextmenu="return false;" alt="">
+        <img src="{{ asset('images/holy-prophet-family-tree.svg') }}" ondragstart="return false;" oncontextmenu="return false;" alt="">
     </div>
 </section>
 @endsection
