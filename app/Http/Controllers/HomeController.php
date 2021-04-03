@@ -95,12 +95,7 @@ class HomeController extends Controller
     public function newHome(){
         $pixels = pixelbox::select('boxid','country_id')->get()->toArray();
 
-
-        // SELECT country_id,userid FROM pixelboxes WHERE
-        // `created_at` > DATE_SUB(NOW(), INTERVAL 1 WEEK)
-        // ORDER BY `country_id` DESC limit 3
-
-        $popular = DB::select('select `country_id`, count(*) as cnt from pixelboxes group by `country_id` order by cnt desc limit 3');
+        $popular = DB::select('select `country_id`, count(*) as cnt from pixelboxes group by `country_id` order by cnt desc limit 5');
 
         $boxIDs = array();
         $country_ids = array();

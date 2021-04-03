@@ -1,5 +1,7 @@
 $(document).ready(function(){
     let html = '';
+    var darudPixelTimer;
+
     for(c=1; c <= 500; c++){
         if(taken.includes(c)){
             var cntry_index = taken.indexOf(c);
@@ -35,8 +37,29 @@ $(document).ready(function(){
                 }
             });
         }else{
+            var darud = "<div class=\'ipx-modal-darud\'>"+
+            "اللَّهمَّ صلِّ على محمَّدٍ وعلى آلِ محمَّدٍ"+
+            "كما صلَّيْتَ على إبراهيمَ وعلى آلِ إبراهيمَ ، إنَّك حميدٌ مجيدٌ<br><br>"+
+            "اللَّهمَّ بارِكْ على محمَّدٍ وعلى آلِ محمَّدٍ"+
+            "كما باركْتَ على إبراهيمَ وعلى آلِ إبراهيمَ ، إنَّك حميدٌ مجيدٌ</div>";
             $('.ipx-modal-content form').fadeIn();
-            $('.ipx-modal-header').html('<div>Recite, Login and Own Pixel</div>');
+
+            // -- Timer
+            darudPixelTimer = setInterval(myTimer, 1000);
+            var sec = 15;
+            // -- timer Handeler
+            function myTimer() {
+                $("#ipx-darud-timer").text("Login will be active in " +sec+ " s").fadeIn();
+                sec--;
+                if(sec == 0){
+                    $("#ipx-darud-timer").fadeOut();
+                    $('.ipx-social-login-area button').prop('disabled', false);
+                    clearInterval(darudPixelTimer);
+                }
+            }
+
+
+            $('.ipx-modal-header').html('<div>Recite, Login and Own Pixel'+darud+'</div>');
             $('#pixelIdVal').val(pixelId);
         }
 
@@ -45,14 +68,10 @@ $(document).ready(function(){
 
     $('#ipx-profile-modal .close').click(function(){
         $('#ipx-profile-modal').fadeOut();
+        clearInterval(darudPixelTimer);
+        $("#ipx-darud-timer").fadeOut();
+        $('.ipx-social-login-area button').prop('disabled', true);
+        
     });
 
-    // -- Enable disable login if darood not read
-    // $('#daroodConfirmation').on('change',function(){
-    //     if($('#daroodConfirmation').prop('checked')){
-    //         $('.login-btn-after-darood').attr('disabled', false);
-    //     }else{
-    //         $('.login-btn-after-darood').attr('disabled', true);
-    //     }
-    // });
 });

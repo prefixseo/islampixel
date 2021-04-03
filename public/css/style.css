@@ -31,7 +31,7 @@ header{
     justify-content: space-between;
 }
 .ipx-footer-widget{color: white;}
-.ipx-footer-nav{display:flex;justify-content: space-between;}
+.ipx-footer-nav{display:flex;justify-content: space-between;margin-top: 7px;}
 .ipx-footer-nav > a { text-decoration: none;color: #9BC3C6;padding: 5px 10px; margin: 0 10px; }
 .ipx-footer-nav > a:hover {color: white;}
 
@@ -45,12 +45,14 @@ header{
     }
     .ipx-footer-nav {
         justify-content: center;
+        margin-top: 0;
     }
     .ipx-social-nav {
         display: flex;
         justify-content: center;
     }
     .ipx-social-nav >a{
-        padding: 0px 10px; margin: 5px 10px;
+        padding: 0px 10px;
+        margin: 5px 10px;
     }
 }
