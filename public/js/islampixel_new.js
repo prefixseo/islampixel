@@ -2,7 +2,7 @@ $(document).ready(function(){
     let html = '';
     var darudPixelTimer;
 
-    for(c=1; c <= 500; c++){
+    for(c=1; c <= 10000; c++){
         if(taken.includes(c)){
             var cntry_index = taken.indexOf(c);
             html += '<p class="taken fflag fflag-'+taken_country[cntry_index]+' ff-app ff-sm" data-taken="true" data-boxid="'+c+'"></p>';

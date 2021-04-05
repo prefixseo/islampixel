@@ -71,8 +71,8 @@ button.ipx-btn:hover{background: linear-gradient( to left,#8DD9C0,#19A2A5 ); }
 .btn-block{display: block;width: 100%;}
 .ipx-pixels-section{ width: min(90%,1180px); margin:0 auto; margin-top: 50px;margin-bottom: 50px;}
 .ipx-pixel-container{
-    border: 1px dotted #acacac;
-    padding: 5px;
+    border-top: 1px solid #acacac;
+    border-left: 1px solid #acacac;
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
@@ -82,10 +82,11 @@ button.ipx-btn:hover{background: linear-gradient( to left,#8DD9C0,#19A2A5 ); }
     margin: 0;
     background-color: #f1f1f1;
     display: block;
-    width: 15px;
+    width: 12px;
+    height: 12px;
     padding: 0;
-    border: 0.5px solid #ccc;
-    height: 15px;
+    border-right: 1px solid #acacac;
+    border-bottom: 1px solid #acacac;
 }
 
 /* The Modal (background) */
@@ -213,8 +214,8 @@ div#ipx-darud-timer {
         font-size: 20px;
     }
     .ipx-hero {
-        height: 600px;
-        background-size: 240%;
+        height: 480px;
+        background-size: cover;
         background-position: center 0%;
     }
     .ipx-hero-child {
@@ -231,11 +232,14 @@ div#ipx-darud-timer {
         width: unset;
     }
     h1.ipx-first-child-heading {
-        margin-bottom: 20px;
-        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-top: 0px;
+        font-size: 32px;
     }
     p.ipx-light-text {
-        margin-top: 10px;
+        margin-bottom: 0px;
+        margin-top: 0px;
+        font-size: 20px;
     }
     .ipx-card-description {
         padding: 1rem;

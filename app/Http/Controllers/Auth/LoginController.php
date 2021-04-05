@@ -66,18 +66,26 @@ class LoginController extends Controller
     */
     // -- google
     public function handleGoogleCallback(){
-        $user = Socialite::driver('google')->user();
-        $this->_registerOrLoginUser($user);
-
-        return redirect()->route('welcome');
+        try {
+            $user = Socialite::driver('google')->user();
+            $this->_registerOrLoginUser($user);
+            return redirect('/');
+        }
+        catch (\Exception $e) {
+            abort(403,'Google Access Failed',['refresh' => '2;url='.url('/')]);
+        }
     }
 
     //-- Facebook
     public function handleFacebookCallback(){
-        $user = Socialite::driver('facebook')->user();
-        $this->_registerOrLoginUser($user,true);
-
-        return redirect('/');
+        try {
+            $user = Socialite::driver('facebook')->user();
+            $this->_registerOrLoginUser($user);
+            return redirect('/');
+        }
+        catch (\Exception $e) {
+            abort(403,'Facebook Access Failed',['refresh' => '2;url='.url('/')]);
+        }
     }
 
 
@@ -110,7 +118,7 @@ class LoginController extends Controller
 
         //-- get location data and Assign
         // user IP or Google Default
-        // $ip = (strlen($this->get_client_ip()) > 4) ? $this->get_client_ip() : '8.8.8.8';
+        $ip = (strlen($this->get_client_ip()) > 4) ? $this->get_client_ip() : '8.8.8.8';
         // $locationData = file_get_contents('https://api.ipgeolocation.io/ipgeo?apiKey=f56918ccce9d46f5a2ac406e65e48d8f&fields=country_flag,city,state_prov,country_capital,country_name,country_code2,zipcode,latitude,longitude');
         $user->location_data = "--";//$locationData;
 
@@ -125,7 +133,7 @@ class LoginController extends Controller
         $pixel->boxid = $boxId;
         $pixel->userid = $user->id;
         // -- get Country ID prefix
-        $pixel->country_id = trim(file_get_contents('https://ipinfo.io/country'));
+        $pixel->country_id = trim(file_get_contents('https://ipinfo.io/'.$ip.'/country'));
         $pixel->save();
 
         Session::forget('selectedPixelId');
