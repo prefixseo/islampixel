@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\pixelbox;
 use App\Models\User;
+use Auth;
 use Session;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Auth\LoginController;
 
 
 class HomeController extends Controller
@@ -24,8 +26,31 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('design.profile');
     }
+
+    public function pixelassignTocurrentuser() {
+        try{
+            $boxId = Session::get('selectedPixelId');
+            $user = Auth::user();
+
+            $ip = (strlen(LoginController::get_client_ip()) > 4) ? LoginController::get_client_ip() : '8.8.8.8';
+            $pixel = new pixelbox();
+            $pixel->boxid = $boxId;
+            $pixel->userid = $user->id;
+            // -- get Country ID prefix
+            $pixel->country_id = trim(file_get_contents('https://ipinfo.io/'.$ip.'/country'));
+            $pixel->save();
+
+            // -- set logged in user
+            Session::forget('selectedPixelId');
+            session()->flash('msg', 'Success: Selected pixel owned');
+            return redirect()->route('front');
+        } catch (\Exception $e) {
+            abort(403,'Access Denied',['refresh' => '2;url='.url('/')]);
+        }
+    }
+
 
     public function contactUsSubmittion(Request $request)
     {
@@ -111,14 +136,21 @@ class HomeController extends Controller
 
     // -- Save box id as session and redirect for login
     public function boxSessionManager(Request $request){
+
         Session::put('selectedPixelId', $request->get('pixelId'));
 
         if($request->has('facebook')){
             return redirect()->route('login.facebook');
         }elseif($request->has('google')){
             return redirect()->route('login.google');
+        }
+
+        // -- if Existed User logged in
+        if(Auth::check()){
+            return redirect('pixelbyprofile');
         }else{
-            return redirect()->route('welcome');
+            abort(405,'You are not allowed to perform this action this way.',['refresh' => '2;url='.url('/')]);
+            Session::forget('selectedPixelId');
         }
     }
 

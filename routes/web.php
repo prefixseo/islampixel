@@ -18,7 +18,13 @@ use Laravel\Socialite\Facades\Socialite;
 
 Auth::routes();
 
-Route::get('/home','HomeController@index')->middleware('auth')->name('home');
+Route::get('/home', function(){
+    if(Auth::check()):
+        return redirect('/profile');
+    else:
+        return redirect('/');
+    endif;
+})->name('home');
 
 Route::post('/boxmeta', 'HomeController@boxSessionManager')->name('boxManager');
 Route::post('/ajaxGetProfile', 'HomeController@profileWithPixelId')->name('ajaxGetProfile');
@@ -34,7 +40,9 @@ Route::get('/login/facebook/callback',  'auth\LoginController@handleFacebookCall
 
 
 //-- Designs
-Route::get( '/', 'HomeController@newHome');
+Route::get( '/', 'HomeController@newHome')->name('front');
+Route::get( '/profile', 'HomeController@index')->middleware('auth');
+Route::get( '/pixelbyprofile', 'HomeController@pixelassignTocurrentuser');
 Route::post('/ajaxGetUserDetails', 'HomeController@getProfilebyPixel')->name('ajaxGetProfile');
 
 Route::get( 'familytree', function(){ return view('design.shajra'); });

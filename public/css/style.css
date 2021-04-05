@@ -34,6 +34,13 @@ header{
 .ipx-footer-nav{display:flex;justify-content: space-between;margin-top: 7px;}
 .ipx-footer-nav > a { text-decoration: none;color: #9BC3C6;padding: 5px 10px; margin: 0 10px; }
 .ipx-footer-nav > a:hover {color: white;}
+.ipx-server-response-msg {
+    margin: 30px auto;
+    width: min(100%, 1168px);
+    padding: 15px;
+    background: #b2e9b3;
+    border-radius: 10px;
+}
 
 @media screen and (max-width: 767px){
     .ipx-footer-widgets-wrapper {

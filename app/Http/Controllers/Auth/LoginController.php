@@ -80,7 +80,7 @@ class LoginController extends Controller
     public function handleFacebookCallback(){
         try {
             $user = Socialite::driver('facebook')->user();
-            $this->_registerOrLoginUser($user);
+            $this->_registerOrLoginUser($user,true);
             return redirect('/');
         }
         catch (\Exception $e) {
@@ -136,12 +136,16 @@ class LoginController extends Controller
         $pixel->country_id = trim(file_get_contents('https://ipinfo.io/'.$ip.'/country'));
         $pixel->save();
 
+        session()->flash('msg', 'Success: Selected pixel owned');
+
+        // -- set logged in user
+        Auth::login($user);
+
         Session::forget('selectedPixelId');
         // return redirect()->route('welcome');
-        //Auth::login($user);
     }
 
-    protected function get_client_ip() {
+    public static function get_client_ip() {
         $ipaddress = '';
         if (getenv('HTTP_CLIENT_IP'))
             $ipaddress = getenv('HTTP_CLIENT_IP');

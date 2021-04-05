@@ -42,6 +42,11 @@
         @endif
     </div>
 
+    @if(session()->has('msg'))
+    <div class="ipx-server-response-msg">
+        <b>{{ session()->get('msg') }}</b>
+    </div>
+    @endif
     <!-- Pixels -->
     <div class="ipx-pixels-section">
         <div class="ipx-pixel-container"></div>
@@ -59,8 +64,12 @@
                 <input type="hidden" name="pixelId" id="pixelIdVal">
                 <div class="ipx-social-login-area">
                     <div id="ipx-darud-timer">Login will be active in 15 s</div>
+                    @guest
                     <button type="submit" disabled name="facebook" class="ipx-login-facebook"> Countinue with Facebook</button>
                     <button type="submit" disabled name="google" class="ipx-login-google">Continue with Google</button>
+                    @else
+                    <button type="submit" disabled name="ownpixel" class="ipx-login-google">Continue <b>{{ Auth::user()->name }}</b> profile</button>
+                    @endguest
                 </div>
             </form>
         </div>
