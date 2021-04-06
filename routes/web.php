@@ -42,9 +42,19 @@ Route::get('/login/facebook/callback',  'auth\LoginController@handleFacebookCall
 //-- Designs
 Route::get( '/', 'HomeController@newHome')->name('front');
 Route::get( '/profile', 'HomeController@index')->middleware('auth');
+Route::get( '/profile/{id}', 'HomeController@index');
 Route::get( '/pixelbyprofile', 'HomeController@pixelassignTocurrentuser');
-Route::post('/ajaxGetUserDetails', 'HomeController@getProfilebyPixel')->name('ajaxGetProfile');
-
+Route::post( '/ajaxGetUserDetails', 'HomeController@getProfilebyPixel')->name('ajaxGetProfile');
 Route::get( 'familytree', function(){ return view('design.shajra'); });
 Route::get( 'contact', function(){ return view('design.contact'); });
 Route::post( 'contact', 'HomeController@contactUsSubmittion' );
+
+// -- Admin
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
+    Route::get( 'stats', 'AdminDashboard@index' );
+    Route::get( 'users', 'AdminDashboard@userListing' );
+    Route::get( 'pixels', 'AdminDashboard@pixelsListing' );
+    Route::get( 'createpixel', 'AdminDashboard@createPixel' );
+    Route::post( 'createpixel', 'AdminDashboard@createPixelStore' );
+    Route::post( 'pixeldelete', 'AdminDashboard@destroyPixel' );
+});

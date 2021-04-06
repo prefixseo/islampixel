@@ -40,4 +40,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public static function getUserNameById($id) {
+        return self::select('name')->where('id',$id)->first()->name;
+    }
+
+    public static function getUserDropdownOptions() {
+        $html = '';
+        foreach(self::all() as $user){
+            $html .= "<option value='$user->id'>$user->name</option>";
+        }
+        return $html;
+    }
 }

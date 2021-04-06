@@ -1,7 +1,6 @@
-
 .ipx-hero{
 	justify-content: center;
-    height: 100vh;
+    height: 50vh;
 	display: flex;
     background-repeat:no-repeat;
     align-items: start;
@@ -78,7 +77,6 @@ button.ipx-btn:hover{background: linear-gradient( to left,#8DD9C0,#19A2A5 ); }
     align-items: stretch;
 }
 .ipx-pixel-container p {
-    flex-grow: 1;
     margin: 0;
     background-color: #f1f1f1;
     display: block;
@@ -87,8 +85,10 @@ button.ipx-btn:hover{background: linear-gradient( to left,#8DD9C0,#19A2A5 ); }
     padding: 0;
     border-right: 1px solid #acacac;
     border-bottom: 1px solid #acacac;
+    cursor: pointer;
 }
 
+.ipx-pixel-container p:not(.fflag):hover { background:yellow; }
 /* The Modal (background) */
 #ipx-profile-modal {
   display: none;/*  Hidden by default */
@@ -112,6 +112,15 @@ button.ipx-btn:hover{background: linear-gradient( to left,#8DD9C0,#19A2A5 ); }
     background: white;
     color: white;
     border-radius: 10px;
+}
+#ipx-profile-modal a.btn {
+    text-decoration: none;
+    color: white;
+    border: 1px solid white;
+    padding: 5px;
+}
+a.btn:hover {
+    background: rgba(255,255,255,0.3);
 }
 .ipx-modal-header{
     background: linear-gradient( to bottom,#8DD9C0,#19A2A5 );
@@ -214,9 +223,9 @@ div#ipx-darud-timer {
         font-size: 20px;
     }
     .ipx-hero {
-        height: 480px;
+        height: 400px;
         background-size: cover;
-        background-position: center 0%;
+        background-position: left;
     }
     .ipx-hero-child {
         flex-direction: column;

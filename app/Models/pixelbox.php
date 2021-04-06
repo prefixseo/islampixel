@@ -280,4 +280,12 @@ class pixelbox extends Model
     public static function getCountryByCountryId($id) {
         return self::$countryList[trim($id)];
     }
+
+    public static function getCountryDropdownOptions() {
+        $html = '';
+        foreach(self::$countryList as $key=>$val){
+            $html .= "<option value='$key'>$val</option>";
+        }
+        return $html;
+    }
 }

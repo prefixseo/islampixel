@@ -14,7 +14,7 @@ For complete information visit: www.freakflagsprite.com
     overflow: hidden;
     position: relative;
     vertical-align: middle;
-    box-sizing: content-box;
+    /* box-sizing: content-box; */
 }
 .fflag-CH,
 .fflag-NP {box-shadow: none!important}

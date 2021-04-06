@@ -6,7 +6,7 @@
 .profile-wrapper{
     display: flex;
     flex-direction: column;
-    width: min(100%, 238px);
+    width: min(100%, 320px);
     align-items: center;
     margin: 20px auto;
 }
@@ -17,13 +17,18 @@
 @section('content')
 <section>
     <div class="ipx-content-area">
-        <h1 class="ipx-heading">{{ __(Auth::user()->name) }}'s profile</h1>
+        <h1 class="ipx-heading">{{ __($user->name) }}'s profile</h1>
         <div class="profile-wrapper">
-            @if(Auth::user())
-                <img src="{{ asset(Auth::user()->avatar) }}" alt="avatar profile" class="mb-3 rounded-circle"/>
-                <p><b>{{ __(Auth::user()->name) }}</b> <i>owned {{ \App\Models\pixelbox::where('userid', '=',Auth::user()->id)->get()->count() }} pixels</i></p>
-                <p><a href='mailto:{{ __(Auth::user()->email) }}'>{{ __(Auth::user()->email) }}</a></p>
-                <p><i>Logged in Using: </i><b>{{ __(Auth::user()->provider_name) }}</b></p>
+                <img src="{{ asset($user->avatar) }}" alt="avatar profile" class="mb-3 rounded-circle"/>
+                <p><b>{{ __($user->name) }}</b> <i>owned {{ \App\Models\pixelbox::where('userid', '=',$user->id)->get()->count() }} pixels</i></p>
+                
+                @if(Auth::check())
+                    <p><a href='mailto:{{ __($user->email) }}'>{{ __($user->email) }}</a></p>
+                @endif
+                
+                <p><i>Registered using: </i><b>{{ __($user->provider_name) }}</b></p>
+                
+                @if(Auth::check() && Auth::user()->id == $user->id)
                 <a class="btn btn-danger btn-sm mt-3" href="{{ route('logout') }}"
                     onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">
@@ -32,7 +37,7 @@
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
-            @endif
+                @endif
         </div>
     </div>
 </section>

@@ -24,9 +24,16 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index($id)
     {
-        return view('design.profile');
+        if(isset($id)){
+            $user = User::findorfail($id);
+        }elseif(Auth::check()){
+            $user = Auth::user();
+        }else{
+            abort(405);
+        }
+        return view('design.profile', compact('user'));
     }
 
     public function pixelassignTocurrentuser() {
@@ -189,6 +196,9 @@ class HomeController extends Controller
                 </div>
                 <div>
                     <i class="fflag fflag-'.$userId->country_id.' ff-md"></i>&nbsp; '.$userId->country_id.'
+                </div>
+                <div>
+                    <a class="btn" href="'.url('/profile/'.$user->id).'">View profile</a>
                 </div>
             ';
             
