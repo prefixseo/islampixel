@@ -6,14 +6,19 @@ use Illuminate\Http\Request;
 use App\Models\pixelbox;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Auth;
 
 
 class AdminDashboard extends Controller
 {
     function __construct(){
-        if(Auth::user()->email != 'arehman.sattar@gmail.com'){
-            abort(403);
-        }
+        $this->middleware(function ($request, $next) {
+            if(Auth::user()->email !== 'arehman.sattar@gmail.com'){
+                return redirect('/');
+            }
+    
+            return $next($request);
+        });
     }
     public function index() {
         $chart = DB::select('select `country_id`, count(*) as y from pixelboxes group by `country_id` order by y desc');

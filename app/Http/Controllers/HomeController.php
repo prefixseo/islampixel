@@ -24,9 +24,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index($id)
+    public function index($id=false)
     {
-        if(isset($id)){
+        if($id){
             $user = User::findorfail($id);
         }elseif(Auth::check()){
             $user = Auth::user();
