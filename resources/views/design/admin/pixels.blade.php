@@ -61,6 +61,14 @@ button[type="submit"]:hover {
         </div>
         @endif
         <h1 class="ipx-heading">Pixels Manager</h1>
+
+        <div>
+            <label>Filter</label>
+            <select id="filter_country" onchange="showFilterResult(this.value)">
+                <?=\App\Models\pixelbox::getCountryDropdownOptions()?>
+            </select>
+        </div>
+
         <table class="listingTable">
             <tr>
                 <th>ID#</th>
@@ -91,5 +99,17 @@ button[type="submit"]:hover {
 @endsection
 
 @section('scripts')
-
+<script>
+$(document).ready(function(){
+    var val = window.location.href.split('/pixels/')[1];
+    if(val.length > 0)
+    {
+        console.log(val);
+        document.getElementById('filter_country').value = val;
+    }
+});
+function showFilterResult(key){
+    window.location.href = window.location.href.split('/pixels')[0] + '/pixels/'+key;
+}
+</script>
 @endsection

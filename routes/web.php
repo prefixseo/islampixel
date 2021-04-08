@@ -54,6 +54,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     Route::get( 'stats', 'AdminDashboard@index' );
     Route::get( 'users', 'AdminDashboard@userListing' );
     Route::get( 'pixels', 'AdminDashboard@pixelsListing' );
+    Route::get( 'pixels/{countryId}', 'AdminDashboard@pixelsListing' );
     Route::get( 'createpixel', 'AdminDashboard@createPixel' );
     Route::post( 'createpixel', 'AdminDashboard@createPixelStore' );
     Route::post( 'pixeldelete', 'AdminDashboard@destroyPixel' );

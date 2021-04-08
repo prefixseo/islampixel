@@ -25,8 +25,12 @@ class AdminDashboard extends Controller
         return view('design.admin.dashboard',compact('chart'));
     }
 
-    public function pixelsListing(Request $request) {
-        $pixels = pixelbox::simplePaginate(10);
+    public function pixelsListing($countryId = false) {
+        if($countryId){
+            $pixels = pixelbox::where('country_id', '=', $countryId)->simplePaginate(10);
+        }else{
+            $pixels = pixelbox::simplePaginate(10);
+        }
         return view('design.admin.pixels', compact('pixels'));
     }
 
