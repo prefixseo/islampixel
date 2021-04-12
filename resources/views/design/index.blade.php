@@ -18,27 +18,29 @@
         @if(isset($popular))
         <?php $f = new NumberFormatter("en", NumberFormatter::SPELLOUT); ?>
         <div class="ipx-hero-child-first-child">
-            <p class="ipx-light-text">Top <?=strtoupper($f->format(count($popular)))?></p>
+            <?php if(count($popular)>0){ ?><p class="ipx-light-text">Top <?=strtoupper($f->format(count($popular)))?></p><?php } ?>
             <h1 class="ipx-first-child-heading">Reader Country</h1>
             <!-- <button class="ipx-btn btn-block">
                 See All
             </button> -->
         </div>
-
-            @foreach($popular as $p)
-                <div class="ipx-country-card">
-                    @if(isset($p->country_id))
-                    <div class="flagImage" style="background-image: url('https://flagcdn.com/w320/<?=strtolower($p->country_id)?>.png');"></div>
-                    @else
-                    <img src="{{ asset('images/question.png') }}">
-                    @endif
-                    <div class="ipx-card-description">
-                        <p class="ipx-card-flag-name"><?=isset($p->country_id) ? \App\Models\pixelbox::getCountryByCountryId($p->country_id) : 'PK'?></p>
-                        <p class="ipx-card-count"><?=isset($p->cnt) ? $p->cnt : '---'?> Readers</p>
+            @if(count($popular) > 0)
+                @foreach($popular as $p)
+                    <div class="ipx-country-card">
+                        @if(isset($p->country_id))
+                        <div class="flagImage" style="background-image: url('https://flagcdn.com/w320/<?=strtolower($p->country_id)?>.png');"></div>
+                        @else
+                        <img src="{{ asset('images/question.png') }}">
+                        @endif
+                        <div class="ipx-card-description">
+                            <p class="ipx-card-flag-name"><?=isset($p->country_id) ? \App\Models\pixelbox::getCountryByCountryId($p->country_id) : 'PK'?></p>
+                            <p class="ipx-card-count"><?=isset($p->cnt) ? $p->cnt : '---'?> Readers</p>
+                        </div>
                     </div>
-                </div>
-            @endforeach
-
+                @endforeach
+            @else
+                <div style="text-align:center;padding-top:15px;flex-grow:1;color:#aaa;"> No Record Found</div>
+            @endif
         @endif
     </div>
 
