@@ -11,15 +11,24 @@ use Auth;
 
 class AdminDashboard extends Controller
 {
+    // arehman.sattar@gmail.com
     function __construct(){
         $this->middleware(function ($request, $next) {
-            if(Auth::user()->email !== 'arehman.sattar@gmail.com'){
+            if(Auth::user()->email !== 'admin@hellodearcode.com'){
                 return redirect('/');
             }
     
             return $next($request);
         });
     }
+
+    public function dashboard() {
+        $users = User::all();
+        $chart = DB::select('select `country_id`, count(*) as y from pixelboxes group by `country_id` order by y desc');
+        $pixelCount = pixelbox::all()->count();
+        return view('design.admin.index',compact('users','chart','pixelCount'));
+    }
+
     public function index() {
         $chart = DB::select('select `country_id`, count(*) as y from pixelboxes group by `country_id` order by y desc');
         return view('design.admin.dashboard',compact('chart'));

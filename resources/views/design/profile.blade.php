@@ -19,7 +19,9 @@
     <div class="ipx-content-area">
         <h1 class="ipx-heading">{{ __($user->name) }}'s profile</h1>
         <div class="profile-wrapper">
+                @if($user->avatar)
                 <img src="{{ asset($user->avatar) }}" alt="avatar profile" class="mb-3 rounded-circle"/>
+                @endif
                 <p><b>{{ __($user->name) }}</b> <i>owned {{ \App\Models\pixelbox::where('userid', '=',$user->id)->get()->count() }} pixels</i></p>
                 
                 @if(Auth::check())
