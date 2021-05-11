@@ -23,19 +23,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
-<!-- 
-                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pixelsNav" aria-expanded="false" aria-controls="pixelsNav">
-                                <div class="sb-nav-link-icon"><i class="fas fa-cubes"></i></div>
-                                Pixels
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                            </a>
-                            <div class="collapse" id="pixelsNav" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="{{ url('/admin/createpixel') }}">Create & Assign</a>
-                                    <a class="nav-link" href="{{ url('/admin/pixels') }}">View All</a>
-                                </nav>
-                            </div> -->
-
+                            
                             <a class="nav-link collapsed" href="{{ url('/admin/requestedpixels') }}">
                                 <div class="sb-nav-link-icon"><i class="fas fa-cubes"></i></div>
                                 Requested Pixel

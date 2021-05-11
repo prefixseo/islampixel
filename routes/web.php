@@ -14,8 +14,6 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-// Route::get('/','HomeController@welcome')->name('welcome');
-
 Auth::routes();
 
 Route::get('/home', function(){
@@ -26,21 +24,8 @@ Route::get('/home', function(){
     endif;
 })->name('home');
 
-// Route::post('/boxmeta', 'HomeController@boxSessionManager')->name('boxManager');
-// Route::post('/ajaxGetProfile', 'HomeController@profileWithPixelId')->name('ajaxGetProfile');
-
-// -- Google Login
-// Route::get('/login/google', 'auth\LoginController@redirectToGoogle')->name('login.google');
-// Route::get('/login/google/callback',  'auth\LoginController@handleGoogleCallback');
-
-
-// // -- Facebook Login
-// Route::get('/login/facebook', 'auth\LoginController@redirectToFacebook')->name('login.facebook');
-// Route::get('/login/facebook/callback',  'auth\LoginController@handleFacebookCallback');
-
 
 // //-- Designs
-// // Route::get( '/', 'HomeController@newHome')->name('front');
 Route::get( '/', 'HomeController@pixelRequestIndex');
 Route::post( '/darudListenedPingback', 'HomeController@darudListenedPingbackCallback');
 Route::get( '/picked-pixel/{box_id}', 'HomeController@objectChoice');
@@ -57,8 +42,7 @@ Route::get( '/profile/{id}/edit', 'HomeController@edit');
 Route::post( '/profile/{id}/edit', 'HomeController@update');
 Route::post( '/profilephoto/{id}/edit', 'HomeController@updateAvatar');
 Route::post( '/profilesocialmedia/{id}/edit', 'HomeController@updateSocialAccounts');
-Route::get( '/pixelbyprofile', 'HomeController@pixelassignTocurrentuser');
-Route::post( '/ajaxGetUserDetails', 'HomeController@getProfilebyPixel');
+
 Route::get( '/familytree', function(){ return view('design.shajra'); });
 Route::get( '/all-countries', 'HomeController@doughnutChartStats');
 Route::get( '/all-readers', 'HomeController@allReadersListing');
@@ -71,13 +55,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
         return redirect('admin/dashboard');
     } );
     Route::get( 'dashboard', 'AdminDashboard@dashboard' );
-    // Route::get( 'pixels', 'AdminDashboard@pixelsListing' );
-    // Route::get( 'pixels/{countryId}', 'AdminDashboard@pixelsListing' );
     Route::get( 'users', 'AdminDashboard@userListing' );
-    // Route::get( 'createpixel', 'AdminDashboard@createPixel' );
-    // Route::post( 'createpixel', 'AdminDashboard@createPixelStore' );
-    // Route::post( 'pixeldelete', 'AdminDashboard@destroyPixel' );
-
     // -- requested pixel routs
     Route::get( 'requestedpixels', 'AdminDashboard@requestedPixelListing' );
     Route::get( 'requestedpixels/{countryId}', 'AdminDashboard@requestedPixelListing' );

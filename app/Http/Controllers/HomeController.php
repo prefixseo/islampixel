@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\pixelbox;
 use App\Models\PixelRequest;
 use App\Models\User;
 use Auth;
@@ -115,30 +114,6 @@ class HomeController extends Controller
      * Edit Profile END
      */
 
-
-    public function pixelassignTocurrentuser() {
-        try{
-            $boxId = Session::get('selectedPixelId');
-            $user = Auth::user();
-
-            $ip = (strlen(LoginController::get_client_ip()) > 4) ? LoginController::get_client_ip() : '8.8.8.8';
-            $pixel = new pixelbox();
-            $pixel->boxid = $boxId;
-            $pixel->userid = $user->id;
-            // -- get Country ID prefix
-            $pixel->country_id = trim(file_get_contents('https://ipinfo.io/'.$ip.'/country'));
-            $pixel->save();
-
-            // -- set logged in user
-            Session::forget('selectedPixelId');
-            session()->flash('msg', 'Success: Selected pixel owned');
-            return redirect()->route('front');
-        } catch (\Exception $e) {
-            abort(403,'Access Denied',['refresh' => '2;url='.url('/')]);
-        }
-    }
-
-
     public function contactUsSubmittion(Request $request)
     {
         $ch = curl_init();
@@ -186,23 +161,6 @@ class HomeController extends Controller
         session()->flash('msg','Thankyou for contact us, Soon we will approach you');
         return redirect()->back();
     }
-
-    // -- welcome
-    public function welcome(){
-        $pixels = pixelbox::select('boxid','country_id')->get()->toArray();
-
-        $boxIDs = array();
-        $country_ids = array();
-
-        if($pixels !== null){
-            foreach($pixels as $v){
-                array_push($boxIDs, trim($v['boxid']));
-                array_push($country_ids, trim($v['country_id']));
-            }
-        }
-        return view('welcome', compact('boxIDs','country_ids'));
-    }
-
 
     public function newHome(){
         $pixels = pixelbox::select('boxid','country_id')->get()->toArray();
@@ -343,77 +301,4 @@ class HomeController extends Controller
 
     // ------------------------ PIXEL REQUEST FORM END ---------------------------
 
-    public function registerBoxDetails($boxid){
-        $pixel = is_numeric($boxId) ? trim(intval($boxid)) : null;
-        if($pixel != null){
-            return view('design.index');
-        }else{
-
-        }
-    }
-
-    // -- Save box id as session and redirect for login
-    public function boxSessionManager(Request $request){
-
-        Session::put('selectedPixelId', $request->get('pixelId'));
-
-        if($request->has('facebook')){
-            return redirect()->route('login.facebook');
-        }elseif($request->has('google')){
-            return redirect()->route('login.google');
-        }
-
-        // -- if Existed User logged in
-        if(Auth::check()){
-            return redirect('pixelbyprofile');
-        }else{
-            abort(405,'You are not allowed to perform this action this way.',['refresh' => '2;url='.url('/')]);
-            Session::forget('selectedPixelId');
-        }
-    }
-
-
-    // -- return profile with Pixel id
-    public function profileWithPixelId(Request $request){
-        if($request->has('pixel')){
-            $userId = pixelbox::where('boxid',$request->get('pixel'))->first();
-            $user = User::where('id',$userId->userid)->first();
-            $html = '
-            <img src="'. asset($user->avatar) .'" alt="avatar profile" class="mb-3 rounded-circle"/>
-            <h4>'. $user->name .'</h4>
-            <p>'. $user->email .'</p>
-            <p><small><em>Pixel owned using '. $user->provider_name .' profile</em></small></p>';
-            
-            echo $html;
-        }
-    }
-
-
-    // -- get profile info by ajax
-    public function getProfilebyPixel(Request $request)
-    {
-        if($request->has('pixel')){
-            $userId = pixelbox::where('boxid',$request->get('pixel'))->first();
-            $user = User::where('id',$userId->userid)->first();
-            $html = '
-                <div>
-                    <p>PROFILE</p>
-                </div>
-                <div>
-                    <div style="background: url('.asset($user->avatar).');" class="ipx-profile-img"></div>
-                </div>
-                <div>
-                    <h3>'.$user->name.'</h3>
-                </div>
-                <div>
-                    <i class="fflag fflag-'.$userId->country_id.' ff-md"></i>&nbsp; '.$userId->country_id.'
-                </div>
-                <div>
-                    <a class="btn" href="'.url('/profile/'.$user->id).'">View profile</a>
-                </div>
-            ';
-            
-            echo $html;
-        }
-    }
 }

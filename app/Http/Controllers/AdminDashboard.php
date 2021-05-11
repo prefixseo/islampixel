@@ -25,18 +25,9 @@ class AdminDashboard extends Controller
 
     public function dashboard() {
         $userCount = User::all()->count();
-        $chart = DB::select('select `country_id`, count(*) as y from pixelboxes group by `country_id` order by y desc');
-        $pixelCount = pixelbox::all()->count();
+        $chart = DB::select('select `country_id`, count(*) as y from pixel_requests group by `country_id` order by y desc');
+        $pixelCount = PixelRequest::all()->count();
         return view('design.admin.index',compact('userCount','chart','pixelCount'));
-    }
-
-    public function pixelsListing($countryId = false) {
-        if($countryId){
-            $pixels = pixelbox::where('country_id', '=', $countryId)->simplePaginate(10);
-        }else{
-            $pixels = pixelbox::simplePaginate(10);
-        }
-        return view('design.admin.pixels', compact('pixels'));
     }
 
     /**
@@ -92,37 +83,5 @@ class AdminDashboard extends Controller
     public function userListing() {
         $users = User::simplePaginate(10);
         return view('design.admin.users',compact('users'));
-    }
-
-    public function destroyPixel(Request $request) {
-        if($request->has('_box_id')){
-            pixelbox::find($request->get('_box_id'))->delete();
-        }
-        session()->flash('msg', 'Pixel deleted');
-
-        return redirect('admin/pixels');
-    }
-
-
-    public function createPixel(){
-        return view('design.admin.createPixel');
-    }
-
-    public function createPixelStore(Request $request){
-        $pixel = pixelbox::where('boxid', '=', $request->get('_box_id'))->first();
-        if ($pixel === null) {
-
-            $pixel = new pixelbox();
-            $pixel->boxid = $request->get('_box_id');
-            $pixel->country_id = $request->get('_country_id');
-            $pixel->userid = $request->get('_user_id');
-            $pixel->save();
-            
-            session()->flash('msg','Pixel ID# '.$request->get('_box_id').' is Assigned');
-            return redirect('admin/pixels');
-        }else{
-            session()->flash('error','Pixel ID# '.$request->get('_box_id').' is already exist and Taken');
-            return redirect('admin/pixels');
-        }
     }
 }
