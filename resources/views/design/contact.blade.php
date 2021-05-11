@@ -12,8 +12,8 @@
         @if(session()->has('msg'))<p class="ipx-response-box">{{ session()->get('msg') }}</p> @endif
         <form class="ipx-form" method="post">
             {{csrf_field()}}
-            <input type="text" name="ipx-username" placeholder="Your Name" required>
-            <input type="email" name="ipx-email" placeholder="Email Address" required>
+            <input type="text" name="ipx-username" value="{{ Auth::check() ? Auth::user()->name : '' }}" placeholder="Your Name" required>
+            <input type="email" name="ipx-email" value="{{ Auth::check() ? Auth::user()->email : '' }}" placeholder="Email Address" required>
             <input type="text" name="ipx-subject" placeholder="Subject" required>
             <textarea name="ipx-message" placeholder="Explain Requirement" required cols="30" rows="10"></textarea>
             <button type="submit">Submit</button>

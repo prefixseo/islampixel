@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class RegisterController extends Controller
 {
@@ -64,10 +66,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $path = '';
+        if(Request::hasFile('avatar'))
+        {
+            $image = Request::file('avatar');
+            $path = 'socialLoginAvatar/'.uniqid().'_'.time() . '.' . $image->getClientOriginalExtension();
+            Image::make($image->getRealPath())->resize(128, 128)->save(public_path($path));
+        }
+
+        $user = new User();
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = Hash::make($data['password']);
+        $user->avatar = $path;
+        $user->provider_name = "Direct Register";
+        $user->save();
+
+        return $user;
     }
 }

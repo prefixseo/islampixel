@@ -10,6 +10,7 @@ $(document).ready(function(){
             html += '<p data-boxid="'+c+'"></p>';
         }
     }
+
     $('.ipx-pixel-container').append(html);
 
     $('.ipx-pixel-container p').on('click',function(){

@@ -46,7 +46,7 @@
 
     @if(session()->has('msg'))
     <div class="ipx-server-response-msg">
-        <b>{{ session()->get('msg') }}</b>
+        <b>{!! session()->get('msg') !!}</b>
     </div>
     @endif
     <!-- Pixels -->
@@ -81,10 +81,5 @@
 @section('scripts')
 <script src="{{ asset('js/islampixel_new.js') }}"></script>
 <script>
-let taken = [{{ implode(',',$boxIDs) }}];let taken_country = [<?="'" . implode( "', '", $country_ids). "'"?>];let ajaxUrl = '{{ url("ajaxGetUserDetails") }}';
-// Get the modal
-$('.ipx-pixel-container').click(function(){
-    $('#ipx-profile-modal').fadeIn();
-});
-</script>
+var taken = [{{ implode(',',$boxIDs) }}];var taken_country = [<?="'" . implode( "', '", $country_ids). "'"?>];var homeUrl = '{{ url('/') }}';var ajaxUrl = '{{ url("ajaxGetUserDetails") }}';</script>
 @endsection

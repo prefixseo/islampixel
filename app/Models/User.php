@@ -19,7 +19,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'password'
     ];
 
     /**
@@ -44,6 +44,10 @@ class User extends Authenticatable
 
     public static function getUserNameById($id) {
         return self::select('name')->where('id',$id)->first()->name;
+    }
+
+    public static function getUserById($id) {
+        return self::where('id',$id)->first();
     }
 
     public static function getUserDropdownOptions() {

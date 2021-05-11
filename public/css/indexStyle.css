@@ -88,7 +88,7 @@ button.ipx-btn:hover{background: linear-gradient( to left,#8DD9C0,#19A2A5 ); }
     cursor: pointer;
 }
 
-.ipx-pixel-container p:not(.fflag):hover { background:yellow; }
+.ipx-pixel-container p:not(.taken):hover { background:yellow; }
 /* The Modal (background) */
 #ipx-profile-modal {
   display: none;/*  Hidden by default */
