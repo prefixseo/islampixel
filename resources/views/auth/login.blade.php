@@ -12,16 +12,16 @@
                         @csrf
 
 
-                        <!-- <div class="form-group row">
+                        <div class="form-group row">
                             <div class="col-md-3 offset-md-3">
-                                <a href="#" class="btn btn-danger btn-block">Google</a>
+                                <a href="{{ url('/login/google') }}" class="btn btn-danger btn-block">Google</a>
                             </div>
                             <div class="col-md-3">
-                                <a href="#" class="btn btn-primary btn-block">Facebook</a>
+                                <a href="{{ url('/login/facebook') }}" class="btn btn-primary btn-block">Facebook</a>
                             </div>
                         </div>
 
-                        <p class="divider text-center">-- OR --</p> -->
+                        <p class="divider text-center">-- OR --</p>
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>

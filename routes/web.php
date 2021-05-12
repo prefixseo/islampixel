@@ -25,6 +25,15 @@ Route::get('/home', function(){
 })->name('home');
 
 
+// -- Google Login
+Route::get('/login/google', 'auth\LoginController@redirectToGoogle')->name('login.google');
+Route::get('/login/google/callback',  'auth\LoginController@handleGoogleCallback');
+
+
+// // -- Facebook Login
+Route::get('/login/facebook', 'auth\LoginController@redirectToFacebook')->name('login.facebook');
+Route::get('/login/facebook/callback',  'auth\LoginController@handleFacebookCallback');
+
 // //-- Designs
 Route::get( '/', 'HomeController@pixelRequestIndex');
 Route::post( '/darudListenedPingback', 'HomeController@darudListenedPingbackCallback');

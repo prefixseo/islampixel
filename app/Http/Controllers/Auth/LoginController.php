@@ -68,8 +68,11 @@ class LoginController extends Controller
     public function handleGoogleCallback(){
         try {
             $user = Socialite::driver('google')->user();
-            $this->_registerOrLoginUser($user);
-            return redirect('/');
+            Session::put('social_provider',"Google");
+            Session::put('social_provider_uemail',$user->email);
+            Session::put('social_provider_uname',$user->name);
+            // $this->_registerOrLoginUser($user);
+            return redirect('/register');
         }
         catch (\Exception $e) {
             abort(403,'Google Access Failed',['refresh' => '2;url='.url('/')]);
@@ -80,8 +83,11 @@ class LoginController extends Controller
     public function handleFacebookCallback(){
         try {
             $user = Socialite::driver('facebook')->user();
-            $this->_registerOrLoginUser($user,true);
-            return redirect('/');
+            Session::put('social_provider',"Facebook");
+            Session::put('social_provider_uemail',$user->email);
+            Session::put('social_provider_uname',$user->name);
+            // $this->_registerOrLoginUser($user,true);
+            return redirect('/register');
         }
         catch (\Exception $e) {
             abort(403,'Facebook Access Failed',['refresh' => '2;url='.url('/')]);

@@ -5,9 +5,22 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Register') }} {{ \Session::exists('social_provider') ? 'via '.\Session::get('social_provider') : ''}}</div>
 
                 <div class="card-body">
+                @if(!Session::exists('social_provider'))
+                    <div class="form-group row">
+                        <div class="col-md-3 offset-md-3">
+                            <a href="{{ url('/login/google') }}" class="btn btn-danger btn-block">Google</a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{{ url('/login/facebook') }}" class="btn btn-primary btn-block">Facebook</a>
+                        </div>
+                    </div>
+
+                    <p class="divider text-center">-- OR --</p>
+                @endif
+
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
@@ -15,7 +28,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ \Session::exists('social_provider_uname') ? \Session::get('social_provider_uname') : old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +42,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ \Session::exists('social_provider_uemail') ? \Session::get('social_provider_uemail') : old('email') }}" required autocomplete="email">
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -77,8 +90,6 @@
                             </div>
                         </div>
 
-
-
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -87,9 +98,14 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<?php
+Session::forget(['social_provider','social_provider_uemail','social_provider_uname']);
+?>
 @endsection

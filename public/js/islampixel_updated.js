@@ -50,7 +50,7 @@ $(document).ready(function(){
                 }
             });
         }else{
-            if(!loggedin) { window.location = homeUrl + '/login'; return;}
+            if(!loggedin) { window.location = homeUrl + '/register'; return;}
             var darud = "<div class=\'ipx-modal-darud\'>"+
             "اللَّهمَّ صلِّ على محمَّدٍ وعلى آلِ محمَّدٍ"+
             "كما صلَّيْتَ على إبراهيمَ وعلى آلِ إبراهيمَ ، إنَّك حميدٌ مجيدٌ<br><br>"+
