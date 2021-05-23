@@ -25,12 +25,19 @@
 .ipx-hero-child > div {
     width: calc(100%/6);
 }
-.ipx-light-text{color: #ABABAB;margin-top: 45px;font-size: 25px;margin-bottom: 10px;}
+.ipx-light-text{
+    color: #ABABAB;
+    margin-top: 20px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+}
 .ipx-first-child-heading{
     color: #030303;
-    font-size: 42px;
-    line-height: 40px;
+    font-size: 26px;
+    line-height: 36px;
     font-weight: 500;
+    text-align: center;
 }
 button.ipx-btn{ 
     cursor: pointer;
@@ -46,6 +53,10 @@ button.ipx-btn:hover{background: linear-gradient( to left,#8DD9C0,#19A2A5 ); }
 .ipx-country-card{
     box-shadow: 0 0 10px #ccc;
     border-radius: 10px;
+    display: inline-block;
+    max-width: 180px;
+    width: 100%;
+    margin: 10px;
 }
 .flagImage {
     height: 120px;
@@ -258,5 +269,9 @@ div#ipx-darud-timer {
     }
     .ipx-pixels-section {
         margin-top: 70px;
+    }
+    .ipx-pixel-container p{
+        height: 30px;
+        width: 30px;
     }
 }

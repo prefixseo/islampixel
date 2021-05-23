@@ -8,6 +8,7 @@
 @section('content')
 <section>
     <div class="ipx-content-area">
+        <b style="float: right;">Acquired Pixel ID: #{{ $pixelid[0]->boxid }}</b>
         <h1 class="ipx-heading">Update Password</h1>
         @if(session()->has('msg'))<p class="ipx-response-box">{{ session()->get('msg') }}</p> @endif
         <form class="ipx-form" action="{{ url('/profile/'.$user->id.'/edit') }}" method="POST">
@@ -34,6 +35,7 @@
             <input type="url" name="ipx-twt" value="{{ $user->social_twt }}" placeholder="Enter Twitter Profile Url">
             <input type="url" name="ipx-github" value="{{ $user->social_github }}" placeholder="Enter Github Profile Url">
             <input type="url" name="ipx-lin" value="{{ $user->social_lin }}" placeholder="Enter Linkedin Profile Url">
+            <input type="url" name="ipx-reddit" value="{{ $user->social_reddit }}" placeholder="Enter Reddit Profile Url">
             <button type="submit">Update Social Profiles</button>
         </form>
 

@@ -47,7 +47,7 @@ img.boxshadow{
     width: 125px;
 }
 img.social-icon{
-    width: 32px;
+    width: 28px;
     transition-property: transform,filter; 
     transition-duration: .7s;
     transition-timing-function: ease-in-out;
@@ -142,6 +142,12 @@ img.social-icon{
                         @if($user->social_lin != null)
                             <a href="{!!  $user->social_lin !!}" target="_blank">
                                 <img src="{{ url('/images/linkedin.png') }}" class="social-icon" alt="linkedin profile link">
+                            </a>
+                        @endif
+
+                        @if($user->social_reddit != null)
+                            <a href="{!!  $user->social_reddit !!}" target="_blank">
+                                <img src="{{ url('/images/reddit.png') }}" class="social-icon" alt="reddit profile link">
                             </a>
                         @endif
                     </div>

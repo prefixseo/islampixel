@@ -55,7 +55,8 @@ class HomeController extends Controller
      public function edit($id){
         if($id == Auth::user()->id){
             $user = User::findorfail($id);
-            return view('design.editprofile', compact('user'));
+            $pixelid = PixelRequest::select('boxid')->where('userid',$id)->get();
+            return view('design.editprofile', compact('user','pixelid'));
         }
 
         abort(403);
@@ -106,6 +107,7 @@ class HomeController extends Controller
         $user->social_twt = trim($request->get('ipx-twt'));
         $user->social_github = trim($request->get('ipx-github'));
         $user->social_lin = trim($request->get('ipx-lin'));
+        $user->social_reddit = trim($request->get('ipx-reddit'));
         $user->save();
         return redirect('/profile');
     }
@@ -162,24 +164,35 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
-    public function newHome(){
-        $pixels = pixelbox::select('boxid','country_id')->get()->toArray();
-
-        $popular = DB::select('select `country_id`, count(*) as cnt from pixelboxes group by `country_id` order by cnt desc limit 5');
-
-        $boxIDs = array();
-        $country_ids = array();
-
-        if($pixels !== null){
-            foreach($pixels as $v){
-                array_push($boxIDs, trim($v['boxid']));
-                array_push($country_ids, trim($v['country_id']));
-            }
+    // -- get profile info by ajax
+    public function getProfilebyPixel(Request $request)
+    {
+        if($request->has('pixel')){
+            $p = PixelRequest::select('boxid','emoji_name','weburl','userid')->where('boxid',$request->get('pixel'))->first();
+            $user = User::getUserById($p->userid);
+            ?>
+                <div class="record">
+                    <span class="close black-color" onclick="closeModal()">&times;</span>
+                    <div>
+                        <img class="boxshadow" src="<?=asset($user->avatar) ?>" />
+                        <h3><?=$user->name ?></h3>
+                    </div>
+                    <div>
+                        Pixel ID# <?=$p->boxid ?>
+                    </div>
+                    
+                    <div>
+                        Pixel Image: <img src="<?=asset('emojis/'.$p->emoji_name) ?>" />
+                    </div>
+                    <div>&nbsp;</div>
+                    <div>
+                        <a class="btn-viewprofile" href="<?=url('profile/'.$user->id)?>">View Profile</a>
+                    </div>
+                </div>
+            <?php
+            exit;
         }
-
-        return view('design.index', compact('boxIDs','country_ids','popular'));
     }
-
 
     // -- ---------------- NEW PIXEL REUEST SELECTION START----------------
     public function darudListenedPingbackCallback(Request $request){

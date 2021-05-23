@@ -90,6 +90,15 @@
                             </div>
                         </div>
 
+                        
+                        <div class="form-group row">
+                            <label for="confirm-shahadat" class="col-md-9 col-form-label text-md-left">{{ __('Do You Attest that there is no GOD except ALLAH (SWT) and Prophet Muhammad (PBUH) is Last Messenger of ALLAH (SWT) ?') }}</label>
+
+                            <div class="col-md-3 text-center">
+                                <input id="confirm-shahadat" type="checkbox" class="form-check-input" name="confirm_shahadat" required>
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -108,4 +117,26 @@
 <?php
 Session::forget(['social_provider','social_provider_uemail','social_provider_uname']);
 ?>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function(){
+
+        var darud_audio_player_obj = document.createElement('audio');
+        darud_audio_player_obj.setAttribute('preload', "none");
+        darud_audio_player_obj.setAttribute('src', '{{ asset('/audio/kalima.mp3') }}');
+
+
+        // -- trace checked consent checkbox
+        $('#confirm-shahadat').on('change', function(){
+            if(this.checked){
+                darud_audio_player_obj.play();
+            }else{
+                darud_audio_player_obj.pause();
+                darud_audio_player_obj.currentTime = 0;
+            }
+        });
+    });
+</script>
 @endsection

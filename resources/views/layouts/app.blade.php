@@ -35,6 +35,5 @@
     </div>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     @yield('scripts')
-    <script src="{{ asset('js/islampixel.js') }}"></script>
 </body>
 </html>

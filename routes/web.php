@@ -49,11 +49,12 @@ Route::get( '/profile', 'HomeController@index')->middleware('auth');
 Route::get( '/profile/{id}', 'HomeController@index');
 Route::get( '/profile/{id}/edit', 'HomeController@edit');
 Route::post( '/profile/{id}/edit', 'HomeController@update');
+Route::post( '/ajaxGetUserDetails', 'HomeController@getProfilebyPixel')->name('ajaxGetProfile');
 Route::post( '/profilephoto/{id}/edit', 'HomeController@updateAvatar');
 Route::post( '/profilesocialmedia/{id}/edit', 'HomeController@updateSocialAccounts');
 
-Route::get( '/familytree', function(){ return view('design.shajra'); });
-Route::get( '/all-countries', 'HomeController@doughnutChartStats');
+// Route::get( '/familytree', function(){ return view('design.shajra'); });
+// Route::get( '/all-countries', 'HomeController@doughnutChartStats');
 Route::get( '/all-readers', 'HomeController@allReadersListing');
 Route::get( '/contact', function(){ return view('design.contact'); });
 Route::post( '/contact', 'HomeController@contactUsSubmittion' );
@@ -65,6 +66,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     } );
     Route::get( 'dashboard', 'AdminDashboard@dashboard' );
     Route::get( 'users', 'AdminDashboard@userListing' );
+    Route::get( 'advertise', 'AdminDashboard@advertisementGet' );
+    Route::post( 'advertise', 'AdminDashboard@advertisementPost' );
     // -- requested pixel routs
     Route::get( 'requestedpixels', 'AdminDashboard@requestedPixelListing' );
     Route::get( 'requestedpixels/{countryId}', 'AdminDashboard@requestedPixelListing' );

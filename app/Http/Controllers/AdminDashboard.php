@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\pixelbox;
 use App\Models\PixelRequest;
+use App\Models\advertisement;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -83,5 +84,30 @@ class AdminDashboard extends Controller
     public function userListing() {
         $users = User::simplePaginate(10);
         return view('design.admin.users',compact('users'));
+    }
+
+    /**
+     * Advertisement view
+     */
+    public function advertisementGet(){
+        $ad_code = advertisement::select('adcode')->where('id',1)->get();
+        return view('design.admin.advertise', compact('ad_code'));
+    }
+
+    /**
+     * Advertisement view
+     */
+    public function advertisementPost(Request $request){
+        if($request->has('update')){
+            $ad = advertisement::find(1);
+        }else{
+            $ad = new advertisement();
+        }
+
+        $ad->name = trim($request->get('advertise_name'));
+        $ad->adcode = trim($request->get('advertise_code'));
+        $ad->save();
+        
+        return redirect('/admin/advertise');
     }
 }

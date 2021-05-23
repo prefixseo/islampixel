@@ -59,9 +59,11 @@
             <div class="d-flex col text-center">
                 @if(Auth::check())
                     <p><a href='mailto:{{ __($user->email) }}'>{{ __($user->email) }}</a></p>
+                    <p>Provider: </i><b>{{ __($user->provider_name) }}</b></p>
+                    <a href="{{ url('/profile/'.$user->id.'/edit') }}" class="btn"> Edit Profile</a>
+                @else
+                    <p>Provider: </i><b>{{ __($user->provider_name) }}</b></p>
                 @endif
-                <p>Provider: </i><b>{{ __($user->provider_name) }}</b></p>
-                <a href="{{ url('/profile/'.$user->id.'/edit') }}" class="btn"> Edit Profile</a>
             
             </div>
         </div>
@@ -101,6 +103,12 @@
             @if($user->social_lin != null)
                 <a href="{!!  $user->social_lin !!}" target="_blank">
                     <img src="{{ url('/images/linkedin.png') }}" class="social-icon" alt="linkedin profile link">
+                </a>
+            @endif
+            
+            @if($user->social_reddit != null)
+                <a href="{!!  $user->social_reddit !!}" target="_blank">
+                    <img src="{{ url('/images/reddit.png') }}" class="social-icon" alt="reddit profile link">
                 </a>
             @endif
         </div>

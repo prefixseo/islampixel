@@ -32,34 +32,33 @@ $(document).ready(function(){
 
         if($(this).data('taken'))
         {
+            $('.ipx-modal-content').hide();
+            
             //-- Retrive Profile
             $.ajax({
                 type: "POST",
-                url: checkRequestPixelStatusUri,
+                url: getprofileurl,
                 data: { pixel : pixelId },
                 success:function( data ) {
-                    if(data == 'deactive'){
-                        alert('Pixel Already Taken & Not Activated Yet');
-                    }else{
-                        let goto = JSON.parse(data);
-                        window.open(goto.weburl);
-                    }
+                    $('.ipx-modal-profile').html(data).show();
+                    $('#ipx-profile-modal').fadeIn();
                 },
                 error: function(errorThrown){
                     console.log(errorThrown); // error
                 }
             });
+
         }else{
-            if(!loggedin) { window.location = homeUrl + '/register'; return;}
+            $('.ipx-modal-profile').html("").hide();
+            $('.ipx-modal-content').show();
+
             var darud = "<div class=\'ipx-modal-darud\'>"+
             "اللَّهمَّ صلِّ على محمَّدٍ وعلى آلِ محمَّدٍ"+
             "كما صلَّيْتَ على إبراهيمَ وعلى آلِ إبراهيمَ ، إنَّك حميدٌ مجيدٌ<br><br>"+
             "اللَّهمَّ بارِكْ على محمَّدٍ وعلى آلِ محمَّدٍ"+
             "كما باركْتَ على إبراهيمَ وعلى آلِ إبراهيمَ ، إنَّك حميدٌ مجيدٌ</div>";
-            $('.ipx-modal-content form').fadeIn();
-
             
-            $('.ipx-modal-header').html('<div>'+darud+'</div>');
+            $('.ipx-modal-header').html('<div>'+darud+'</div>').show();
 
             $('#ipx-profile-modal').fadeIn();
             darud_audio_player_obj.play();
@@ -82,6 +81,10 @@ $(document).ready(function(){
             }
 
             darud_audio_player_obj.addEventListener('ended', function() {
+                // -- incase of Not Logged In move to register
+                if(!loggedin) { window.location = homeUrl + '/register'; return;}
+
+                // -- in case of Logged in User move to Fill Details
                 $.ajax({
                     type: "POST",
                     url: darudListenedPingbackUri,
@@ -107,3 +110,7 @@ $(document).ready(function(){
     });
 
 });
+
+function closeModal(){
+    $('#ipx-profile-modal').fadeOut();
+}
